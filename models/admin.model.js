@@ -15,12 +15,10 @@ const adminSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-    },
-    influencers: [{ type: Schema.Types.ObjectId, ref: "Influencer" }],
-    users: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    }
   },
   opt
 );
 
 const AdminModel = mongoose.model("Admin", adminSchema);
-module.exports = adminSchema;
+module.exports = AdminModel;
