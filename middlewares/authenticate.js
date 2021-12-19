@@ -9,7 +9,7 @@ const authenticateJWT = (req, res, next) => {
       const token = authHeader;
   
       // Verification on jwt
-      jwt.verify(token, accessTokenSecret, (err, user) => {
+      jwt.verify(token, process.env.TOKEN_SECRET , (err, user) => {
         // check public or private key is exist
         if (err) {
           return res.status(403).send({
