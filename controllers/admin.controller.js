@@ -1,20 +1,37 @@
 const UserModel = null;
 const InfluencerModel = null;
+const jwt = require("jsonwebtoken");
 
 class AdminController {
   // Admin Controller
   static async getAdmin(req, res) {
     try {
-      res.status(200).send("hallo Admin")
-    } catch (error) {
-      
-    }
+      res.status(200).send("hallo Admin");
+    } catch (error) {}
   }
   static async loginAdmin(req, res) {
     try {
-      res.status(200).send("admin login")
+      const username = req.body.username;
+      const password = req.body.password;
+
+      const isAdmin = await UserModel.find({
+        username: username,
+        password: password,
+      });
+      // isAdmin ? res.status(200).send("admin login") : res.status(404).send({message: "OK", data: "not found"})
+      if (isAdmin) {
+        const accessToken = jwt.sign(
+          { username: isAdmin.username, role: isAdmin.role },
+          accessTokenSecret
+        );
+        res.json({
+          accessToken,
+        });
+      } else {
+        res.send("Username or password incorrect");
+      }
     } catch (error) {
-      
+      res.status(500).send({ error: message.error });
     }
   }
 
@@ -144,10 +161,7 @@ class AdminController {
       const id = req.params.id;
       const body = req.body;
 
-      const updateUser = await UserModel.updateOne(
-        { id: id },
-        body
-      );
+      const updateUser = await UserModel.updateOne({ id: id }, body);
       res.status(200).send({ message: "ok", updateUser });
     } catch (error) {
       res.status(500).send({ err: error });

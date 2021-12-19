@@ -3,14 +3,16 @@ const user = express.Router();
 
 const UserController = require("../../controllers/admin.controller")
 
-user.get('/', UserController.getUsers )
+const authenticateJWT = require("../../middlewares/authenticate")
 
-user.get('/:id', UserController.getUserByID)
+user.get('/', authenticateJWT, UserController.getUsers )
 
-user.post('/', UserController.regisUser)
+user.get('/:id', authenticateJWT, UserController.getUserByID)
 
-user.patch('/', UserController.updateUser)
+user.post('/', authenticateJWT, UserController.regisUser)
 
-user.delete('/:id', UserController.deleteUser)
+user.patch('/', authenticateJWT, UserController.updateUser)
+
+user.delete('/:id', authenticateJWT, UserController.deleteUser)
 
 module.exports = user

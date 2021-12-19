@@ -3,14 +3,16 @@ const influencer = express.Router();
 
 const UserController = require("../../controllers/admin.controller")
 
-influencer.get('/', UserController.getInfluencers )
+const authenticateJWT = require("../../middlewares/authenticate")
 
-influencer.get('/:id', UserController.getInfluencerByID)
+influencer.get('/', authenticateJWT, UserController.getInfluencers )
 
-influencer.post('/', UserController.regisInfluencer)
+influencer.get('/:id', authenticateJWT, UserController.getInfluencerByID)
 
-influencer.patch('/', UserController.updateInfluencer)
+influencer.post('/', authenticateJWT, UserController.regisInfluencer)
 
-influencer.delete('/:id', UserController.deleteInfluencer)
+influencer.patch('/', authenticateJWT, UserController.updateInfluencer)
+
+influencer.delete('/:id', authenticateJWT, UserController.deleteInfluencer)
 
 module.exports = influencer
