@@ -13,7 +13,7 @@ async function main(){
     try{
         await db.connect_db(uri)
         const app = express();
-
+        
         app.use(express.json())
         app.use(routers)
     
