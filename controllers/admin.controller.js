@@ -1,6 +1,7 @@
 const UserModel = null;
 const InfluencerModel = require("../models/influencer.model");
 const AdminModel = require("../models/admin.model");
+const InsightModel = require("../models/insightdata.model")
 const jwt = require("jsonwebtoken");
 
 class AdminController {
@@ -27,7 +28,7 @@ class AdminController {
       if (isAdmin) {
         const accessToken = jwt.sign(
           { username: isAdmin.username, role: isAdmin.role },
-          process.env.TOKEN_SECRET
+          process.env.TOKEN_SECRET, {expiresIn: "1h"}
         );
         res.json({
           accessToken,
@@ -53,13 +54,21 @@ class AdminController {
     try {
       const body = req.body;
 
+      const newInsights = new InsightModel({
+        facebook: body.facebook,
+        instagram: body.instagram,
+        twitter: body.twitter,
+      })
+
+      const insightSaved = await newInsights.save()
+
       const name = body.name;
       const imgCover = body.imgCover;
       const imgProfile = body.imgProfile;
       const followers = body.followers;
       const category = body.category;
       const location = body.location;
-      const insight = body.insight;
+      const insight = insightSaved._id.toString()
       const tags = body.tags;
 
       const newInfluencer = new InfluencerModel({
@@ -69,7 +78,7 @@ class AdminController {
         followers: followers,
         category: category,
         location: location,
-        insight: insight,
+        insights: insight,
         tags: tags,
       });
 
@@ -81,7 +90,7 @@ class AdminController {
   }
   static async getInfluencers(req, res) {
     try {
-      const listInfluencers = InfluencerModel.find();
+      const listInfluencers = await InfluencerModel.find();
       res.status(200).send(listInfluencers);
     } catch (error) {
       res.status(500).send(error.message);
@@ -104,8 +113,9 @@ class AdminController {
 
       const updateInfluencer = await InfluencerModel.updateOne(
         { id: id },
-        body
+        body, {new: true}
       );
+      await InsightModel.updateOne({ id: updateInfluencer._id }, body)
       res.status(200).send({ message: "ok", updateInfluencer });
     } catch (error) {
       res.status(500).send({ err: error });
@@ -123,34 +133,6 @@ class AdminController {
   }
 
   // User Controller
-  static async regisUser(req, res) {
-    try {
-      const body = req.body;
-
-      const nik = body.nik;
-      const name = body.name;
-      const email = body.email;
-      const no_hp = body.no_hp;
-      const no_wa = body.no_wa;
-      const password = body.password;
-      const role = body.role;
-
-      const newUser = new UserModel({
-        name: name,
-        nik: nik,
-        email: email,
-        no_hp: no_hp,
-        no_wa: no_wa,
-        password: password,
-        role: role,
-      });
-
-      const saved = await newUser.save();
-      res.status(201).send(saved);
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
   static async getUsers(req, res) {
     try {
       const listUser = UserModel.find();

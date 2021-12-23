@@ -7,7 +7,7 @@ const opt = {
 
 const influencerSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
       type: String,
     },
     imgProfile: {

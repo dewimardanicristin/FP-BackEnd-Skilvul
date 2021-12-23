@@ -14,7 +14,7 @@ const loginRoute = require('./loginAdmin')
 router.get('/', authenticateJWT , adminController.getAdmin)
 
 router.use("/influencer", influencerRoute)
-router.use("/admin-login", loginRoute)
+router.use("/login", loginRoute)
 // router.use("/user", userRoute)
 
 module.exports = router
