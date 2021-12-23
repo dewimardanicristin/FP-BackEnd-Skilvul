@@ -1,5 +1,5 @@
 const historyModel = require('./../models/history.model')
-const userModel = require('./../models/user.model')
+// const userModel = require('./../models/user')
 
 class historyController{
     static async getHistorybyIDUser(req,res){
@@ -13,13 +13,13 @@ class historyController{
     }
     static async createOneHistory(req,res){
         try{
-            const userModel = await userModel.find()
+            const userModel = await historyModel.find().populate("id_user")
             if(userModel !== null){
                 const body = req.body;
                 const status = body.status;
                 const tanggal = body.tanggal;
                 const influencer = historyModel.find().populate("id_influencer")
-                const history = new history({status : status, tanggal : tanggal, influencer:influencer})
+                const history = new historyModel({status : status, tanggal : tanggal, influencer:influencer})
                 const saved = await history.save()
                 res.status(500).send(saved)
             }
