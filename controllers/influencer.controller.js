@@ -4,7 +4,7 @@ class InfluencerController {
   static async getInfluencer(req, res) {
     try {
       const listInfluencers = await InfluencerModel.find().populate("insights");
-      res.status(200).send(listInfluencers);
+      res.status(200).send({message: "OK", data: listInfluencers});
     } catch (error) {
       res.status(500).send(error.message);
     }

@@ -1,5 +1,6 @@
 const UserModel = null;
-const InfluencerModel = null;
+const InfluencerModel = require("../models/influencer.model");
+const AdminModel = require("../models/admin.model");
 const jwt = require("jsonwebtoken");
 
 class AdminController {
@@ -7,29 +8,41 @@ class AdminController {
   static async getAdmin(req, res) {
     try {
       res.status(200).send("hallo Admin");
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).send({ error: message.error });
+    }
   }
   static async loginAdmin(req, res) {
     try {
-      const username = req.body.username;
-      const password = req.body.password;
+      // const username = req.body.username;
+      // const password = req.body.password;
 
-      const isAdmin = await UserModel.find({
-        username: username,
-        password: password,
+      const body = req.body
+
+      const isAdmin = await AdminModel.findOne({
+        username: body.username,
+        password: body.password,
       });
-      // isAdmin ? res.status(200).send("admin login") : res.status(404).send({message: "OK", data: "not found"})
+      console.log(isAdmin)
       if (isAdmin) {
         const accessToken = jwt.sign(
           { username: isAdmin.username, role: isAdmin.role },
-          accessTokenSecret
+          process.env.TOKEN_SECRET
         );
         res.json({
           accessToken,
-        });
+        })
       } else {
         res.send("Username or password incorrect");
       }
+    } catch (error) {
+      console.log("gagal");
+      res.status(500).send({ error: error.message });
+    }
+  }
+  static async getLoginAdmin(req, res) {
+    try {
+      res.status(200).send("Admin Login");
     } catch (error) {
       res.status(500).send({ error: message.error });
     }
