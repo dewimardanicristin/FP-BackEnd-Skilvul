@@ -26,9 +26,10 @@ const influencerSchema = new mongoose.Schema(
       type: String,
     },
     insights: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Insight"
-      }
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "InsightData",
+    },
+    tags: [],
   },
   opt
 );

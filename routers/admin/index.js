@@ -1,18 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
-const UserController = require("../../controllers/admin.controller")
-
 const authenticateJWT = require("../../middlewares/authenticate")
 
+const adminController = require("../../controllers/admin.controller")
+
 const influencerRoute = require('./influencer')
-const userRoute = require('./user')
+const loginRoute = require('./loginAdmin')
 
-router.get('/', authenticateJWT, UserController.getAdmin )
+// router.get('/', authenticateJWT, UserController.getAdmin )
+// router.post('/', UserController.loginAdmin)
 
-router.post('/', authenticateJWT, UserController.loginAdmin)
+router.get('/', authenticateJWT , adminController.getAdmin)
 
 router.use("/influencer", influencerRoute)
-router.use("/user", userRoute)
+router.use("/admin-login", loginRoute)
+// router.use("/user", userRoute)
 
 module.exports = router
