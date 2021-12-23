@@ -1,9 +1,9 @@
-const Users = require('../models/Users')
+const user = require('../models/user')
 const bidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
     getAll: (req,res) => {
-        users.findAll({
+        user.findAll({
             raw: true,
         })
         .then(result => {
@@ -13,7 +13,7 @@ module.exports = {
 
 addOne : (req,res) => {
     const{nama, email, password, nama_usaha} = req.body
-    Users.create({nama, email, password}, 
+    user.create({nama, email, password}, 
         (error, result) => {
             if(error){
                 res.status(400).json({
@@ -30,11 +30,11 @@ addOne : (req,res) => {
 
 updateOne : async (req,res) => {
     const {nama, nik, email, phoneNumber, wa, password} = req.body
-    const user = await Users.updateOne(
+    const users = await user.updateOne(
         {_id: req.params.id},
         {nama, nik, email, phoneNumber, wa, password, id_bidangUsaha}, {new: true}
     );
-    if(user) {
+    if(users) {
         res.send({
             message: "SUCCESS", user
         })
@@ -46,10 +46,10 @@ updateOne : async (req,res) => {
 },
 
 deleteOne : async (req,res) => {
-    const user = await Users.deleteOne(
+    const users = await user.deleteOne(
         {_id: req.params.id}, {new: true}
     );
-    if(user) {
+    if(users) {
         res.send({
             message: "SUCCESS", user
         })
