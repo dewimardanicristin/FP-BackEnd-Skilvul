@@ -1,4 +1,4 @@
-const Users = require('../models/users')
+const Users = require('../models/Users')
 const bidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
@@ -59,3 +59,35 @@ deleteOne : async (req,res) => {
 }
 }
 
+class UsersController {
+static async regisUsers(req, res) {
+    try {
+        // const{nama_usaha, alamat_usaha, tahun_berdiri} = req.body
+        const createbidangUsaha = function (nama_usaha, alamat_usaha, tahun_berdiri){
+        const newbidangUsaha = new bidangUsahaModel({
+            nama_usaha: nama_usaha,
+            alamat_usaha: alamat_usaha,
+            tahun_berdiri: tahun_berdiri
+        })
+        const saved = await newbidangUsaha.save();
+    };
+
+    //   const{nama, nik, email, phoneNumber, password, wa} = req.body
+    const createUser = function (nama, nik, email, phoneNumber, password, wa){
+      const newUsers = new UsersModel({
+        nama: nama,
+        nik: nik,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: password,
+        wa: wa
+      });
+      const saved = await newUsers.save();
+    };
+
+      res.status(201).send(saved);
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  }
+}
