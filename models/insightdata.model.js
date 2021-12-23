@@ -7,7 +7,7 @@ const insightDataSchema = new mongoose.Schema({
         facebook : [{
             type: String
         }],
-        instagram :[{
+        instagram :[{ 
             type: String
         }],
         twitter :[{
