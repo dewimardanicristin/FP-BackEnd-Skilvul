@@ -3,6 +3,10 @@ const router = express.Router()
 
 const insightDataRoutes = require('./insightData')
 const historyRoutes = require('./history')
+const admin = require('./influencer')
+const searchInfluence = require('./admin')
+const user = require('./user')
+const bidangUsaha = require('./bidangUsaha')
 // this routes just for testing guys
 router.get("/ping",(req,res) => {
     const ready = {
@@ -12,4 +16,9 @@ router.get("/ping",(req,res) => {
 })
 router.use("/insightData",insightDataRoutes)
 router.use("/history",historyRoutes)
+router.use("/admin",admin)
+router.use("/search-influence", searchInfluence)
+route.use("/user",user)
+route.use("/bidangUsaha", bidangUsaha)
+
 module.exports = router
