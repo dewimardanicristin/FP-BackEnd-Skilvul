@@ -12,23 +12,23 @@ const userSchema = new Schema({
         required: true
     },
     nik: {
-        type: String,
+        type: INTEGER,
     },
     email: {
         type: String,
         required: true
     },
     phoneNumber: {
-        type: String,
+        type: INTEGER,
     },
     id_bidangUsaha: [{
             type: Schema.Types.ObjectID,
             ref: "bidangUsaha"
         }],
-    id_history:{
-        type: int,
-        unique: true,
-    },
+    id_history:[{
+        type: Schema.Types.ObjectID,
+        ref: "history"
+    }],
     wa: {
         type: String,
     },
