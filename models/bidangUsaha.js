@@ -20,10 +20,10 @@ const bidangUsahaSchema = new Schema({
         require: true
     },
     tahun_berdiri : {
-        type: int,
+        type: Number,
         require: true
     }
 })
 
-const bidangUsaha = mongoose.model('bidangusaha', bidangUsahaSchema)
-module.exports = bidangUsaha
+const BidangUsaha = mongoose.model('bidangUsaha', bidangUsahaSchema)
+module.exports = BidangUsaha

@@ -8,25 +8,26 @@ module.exports = {
         })
         .then(result => {
             res.send({message: "SUCCESS, result"})
-        }).catch(error => res.send (error))
-},
-
-addOne : (req,res) => {
-    const{nama, email, password, nama_usaha} = req.body
-    user.create({nama, email, password}, 
-        (error, result) => {
-            if(error){
-                res.status(400).json({
-                    message: "NOT FOUND"
-                })
-            } else {
-                res.status(200).json({
-                    message: "SUCCESS",
-                })
-            }
-
         })
-},
+        .catch(error => res.send(error))
+    },
+
+    addOne : (req,res) => {
+        const{nama, email, password} = req.body;
+        if(nama === null && email === null && password === null) {
+            res.status(400).json({message : "Data tidak boleh kosong"})
+        }else{
+            user.create({
+                nama: nama,
+                email: email, 
+                password: password
+            })
+            .then((result)=> {
+                res.status(200).send({message: "Registrasi Sukses", result})
+            })
+            .catch(error => res.send(error))
+        }
+    },
 
 updateOne : async (req,res) => {
     const {nama, nik, email, phoneNumber, wa, password} = req.body
@@ -56,38 +57,6 @@ deleteOne : async (req,res) => {
     } else {
         res.send({message: "ERROR"})
     }
-}
-}
+}}
 
-class UsersController {
-static async regisUsers(req, res) {
-    try {
-        // const{nama_usaha, alamat_usaha, tahun_berdiri} = req.body
-        const createbidangUsaha = function (nama_usaha, alamat_usaha, tahun_berdiri){
-        const newbidangUsaha = new bidangUsahaModel({
-            nama_usaha: nama_usaha,
-            alamat_usaha: alamat_usaha,
-            tahun_berdiri: tahun_berdiri
-        })
-        const saved = await newbidangUsaha.save();
-    };
 
-    //   const{nama, nik, email, phoneNumber, password, wa} = req.body
-    const createUser = function (nama, nik, email, phoneNumber, password, wa){
-      const newUsers = new UsersModel({
-        nama: nama,
-        nik: nik,
-        email: email,
-        phoneNumber: phoneNumber,
-        password: password,
-        wa: wa
-      });
-      const saved = await newUsers.save();
-    };
-
-      res.status(201).send(saved);
-    } catch (error) {
-      res.status(500).send(error.message);
-    }
-  }
-}

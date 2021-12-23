@@ -18,7 +18,7 @@ router.use("/insightData",insightDataRoutes)
 router.use("/history",historyRoutes)
 router.use("/admin",admin)
 router.use("/search-influence", searchInfluence)
-route.use("/user",user)
-route.use("/bidangUsaha", bidangUsaha)
+router.use("/user",user)
+router.use("/bidangUsaha", bidangUsaha)
 
 module.exports = router
