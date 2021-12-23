@@ -1,8 +1,8 @@
-const BidangUsaha = require('../models/bidangUsaha')
+const bidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
     getAll: (req,res) => {
-        BidangUsaha.findAll({
+        bidangUsaha.findAll({
             raw: true,
         })
         .then(result => {
@@ -12,11 +12,11 @@ module.exports = {
 
 updateOne : async (req,res) => {
     const {nama_bidangUsaha, namaUsaha, alamatUsaha, tahunBerdiri} = req.body
-    const bidangUsaha = await BidangUsaha.updateOne(
+    const Bidangusaha = await bidangUsaha.updateOne(
         {_id: req.params.id},
         {nama_bidangUsaha, namaUsaha, alamatUsaha, tahunBerdiri}, {new: true}
     );
-    if(bidangUsaha) {
+    if(Bidangusaha) {
         res.send({
             message: "SUCCESS", bidangUsaha
         })
@@ -28,10 +28,10 @@ updateOne : async (req,res) => {
 },
 
 deleteOne : async (req,res) => {
-    const bidangUsaha = await BidangUsaha.deleteOne(
+    const Bidangusaha = await bidangUsaha.deleteOne(
         {_id: req.params.id}, {new: true}
     );
-    if(bidangUsaha) {
+    if(Bidangusaha) {
         res.send({
             message: "SUCCESS", user
         })
