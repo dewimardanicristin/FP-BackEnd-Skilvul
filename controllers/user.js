@@ -16,8 +16,9 @@ module.exports = {
   getUser: (req, res) => {
     UserModel
       .findOne({
-        id: req.user.id,
+        _id: req.user.id,
       })
+      .populate("bidangUsaha")
       .then((result) => {
         res.send({ message: "SUCCESS", result });
       })
