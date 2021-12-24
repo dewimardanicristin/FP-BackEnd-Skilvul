@@ -10,7 +10,7 @@ const historySchema = new mongoose.Schema({
         },
         id_user : { 
             type : mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            ref: "users"
         },
         tanggal :{
             type:Date,
@@ -18,6 +18,10 @@ const historySchema = new mongoose.Schema({
         id_influencer : {
             type : mongoose.Schema.Types.ObjectId,
             ref: "Influencer"
+        },
+        alasan_pengajuan : {
+            type : String,
+            required : true
         }
 },opts)
 

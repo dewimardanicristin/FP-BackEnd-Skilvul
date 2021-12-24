@@ -12,6 +12,16 @@ module.exports = {
         .catch(error => res.send(error))
     },
 
+    getUser: (req,res) => {
+        user.findOne({
+            id: req.user.id,
+        })
+        .then(result => {
+            res.send({message: "SUCCESS", result})
+        })
+        .catch(error => res.send(error))
+    },
+
     addOne : (req,res) => {
         const{nama, email, password} = req.body;
         if(nama === null && email === null && password === null) {
