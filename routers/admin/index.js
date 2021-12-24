@@ -7,14 +7,13 @@ const adminController = require("../../controllers/admin.controller")
 
 const influencerRoute = require('./influencer')
 const loginRoute = require('./loginAdmin')
+const userRoute = require('./user')
 
-// router.get('/', authenticateJWT, UserController.getAdmin )
-// router.post('/', UserController.loginAdmin)
 
 router.get('/', authenticateJWT , adminController.getAdmin)
 
-router.use("/influencer", influencerRoute)
 router.use("/login", loginRoute)
-// router.use("/user", userRoute)
+router.use("/influencer", influencerRoute)
+router.use("/user", userRoute)
 
 module.exports = router
