@@ -3,7 +3,7 @@ const usahaBidangModel = require("../models/usahaBidang.model")
 
 module.exports = {
   getAll: (req, res) => {
-    user
+    UserModel
       .find({
         raw: true,
       })
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   getUser: (req, res) => {
-    user
+    UserModel
       .findOne({
         id: req.user.id,
       })
