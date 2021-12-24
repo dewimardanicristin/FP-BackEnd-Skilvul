@@ -1,8 +1,9 @@
 const UserModel = null;
 const InfluencerModel = require("../models/influencer.model");
 const AdminModel = require("../models/admin.model");
-const InsightModel = require("../models/insightdata.model")
+const InsightModel = require("../models/insightdata.model");
 const jwt = require("jsonwebtoken");
+const user = require("../models/user.model");
 
 class AdminController {
   // Admin Controller
@@ -18,21 +19,21 @@ class AdminController {
       // const username = req.body.username;
       // const password = req.body.password;
 
-      const body = req.body
+      const body = req.body;
 
       const isAdmin = await AdminModel.findOne({
         username: body.username,
         password: body.password,
       });
-      console.log(isAdmin)
       if (isAdmin) {
         const accessToken = jwt.sign(
           { username: isAdmin.username, role: isAdmin.role },
-          process.env.TOKEN_SECRET, {expiresIn: "1h"}
+          process.env.TOKEN_SECRET,
+          { expiresIn: "1h" }
         );
         res.json({
           accessToken,
-        })
+        });
       } else {
         res.send("Username or password incorrect");
       }
@@ -58,9 +59,9 @@ class AdminController {
         facebook: body.facebook,
         instagram: body.instagram,
         twitter: body.twitter,
-      })
+      });
 
-      const insightSaved = await newInsights.save()
+      const insightSaved = await newInsights.save();
 
       const name = body.name;
       const imgCover = body.imgCover;
@@ -68,7 +69,7 @@ class AdminController {
       const followers = body.followers;
       const category = body.category;
       const location = body.location;
-      const insight = insightSaved._id.toString()
+      const insight = insightSaved._id.toString();
       const tags = body.tags;
 
       const newInfluencer = new InfluencerModel({
@@ -113,9 +114,10 @@ class AdminController {
 
       const updateInfluencer = await InfluencerModel.updateOne(
         { id: id },
-        body, {new: true}
+        body,
+        { new: true }
       );
-      await InsightModel.updateOne({ id: updateInfluencer._id }, body)
+      await InsightModel.updateOne({ id: updateInfluencer._id }, body);
       res.status(200).send({ message: "ok", updateInfluencer });
     } catch (error) {
       res.status(500).send({ err: error });
@@ -172,6 +174,7 @@ class AdminController {
       res.status(500).send({ err: error });
     }
   }
+
 }
 
 module.exports = AdminController;
