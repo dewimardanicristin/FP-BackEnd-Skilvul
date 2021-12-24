@@ -1,27 +1,25 @@
 const mongoose = require("mongoose");
 
 const opt = {
-    timestamps: true,
-    versionKey: false,
-  };
+  timestamps: true,
+  versionKey: false,
+};
 
 const userSchema = new mongoose.Schema(
   {
     nama: {
       type: String,
-      required: true,
     },
     nik: {
-      type: Number,
+      type: String,
     },
     email: {
       type: String,
-      required: true,
     },
     phoneNumber: {
       type: String,
     },
-    id_bidangUsaha: {
+    bidangUsaha: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "bidangUsaha",
     },
@@ -42,5 +40,5 @@ const userSchema = new mongoose.Schema(
   opt
 );
 
-const user = mongoose.model("users", userSchema);
-module.exports = user;
+const UserModel = mongoose.model("Users", userSchema);
+module.exports = UserModel;
