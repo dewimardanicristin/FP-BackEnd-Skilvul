@@ -20,7 +20,7 @@ const bidangUsahaSchema = new Schema({
         require: true
     },
     tahun_berdiri : {
-        type: int,
+        type: Number,
         require: true
     }
 })

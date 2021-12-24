@@ -12,14 +12,14 @@ const userSchema = new Schema({
         required: true
     },
     nik: {
-        type: INTEGER,
+        type: Number,
     },
     email: {
         type: String,
         required: true
     },
     phoneNumber: {
-        type: INTEGER,
+        type: Number,
     },
     id_bidangUsaha: [{
             type: Schema.Types.ObjectID,

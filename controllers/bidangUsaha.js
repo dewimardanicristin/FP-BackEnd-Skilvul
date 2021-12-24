@@ -1,4 +1,4 @@
-const BidangUsaha = require('../models/BidangUsaha')
+const BidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
     getAll: (req,res) => {
