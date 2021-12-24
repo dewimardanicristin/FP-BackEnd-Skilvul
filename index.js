@@ -17,7 +17,7 @@ async function main(){
         app.use(express.json())
         app.use(routers)
     
-        app.listen(port,() => {
+        app.listen(port+"/ping",() => {
             console.log("Server is listening on port",port)
         })
     }
