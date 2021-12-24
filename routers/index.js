@@ -18,6 +18,9 @@ router.get("/ping", (req, res) => {
   };
   res.status(200).send(ready);
 });
+router.get("/", (req, res)=>{
+  res.status(200).send("welcome page")
+})
 router.use("/insightData", insightDataRoutes);
 router.use("/history", historyRoutes);
 router.use("/admin", admin);
