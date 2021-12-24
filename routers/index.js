@@ -3,8 +3,8 @@ const router = express.Router()
 
 const insightDataRoutes = require('./insightData')
 const historyRoutes = require('./history')
-const admin = require('./influencer')
-const searchInfluence = require('./admin')
+const searchInfluence = require('./influencer')
+const admin = require('./admin')
 const user = require('./user')
 const bidangUsaha = require('./bidangUsaha')
 // this routes just for testing guys
