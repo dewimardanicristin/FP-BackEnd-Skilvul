@@ -5,7 +5,6 @@ const userSchema = new Schema({
     id_user: {
         type: String,
         unique: true,
-        required: true
     },
     nama: {
         type: String,
