@@ -15,10 +15,11 @@ const authenticateJWT = (req, res, next) => {
           });
         }
         req.user = user;
+        console.log(req.user);
         next();
       });
     } else {
-      res.redirect("/admin/admin-login")
+      res.status(200).send({message: "OK", result: "You Must Login"})
     }
   };
 

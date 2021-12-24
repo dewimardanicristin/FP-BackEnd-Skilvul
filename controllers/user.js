@@ -1,40 +1,41 @@
-const Users = require('../models/users')
+const user = require('../models/user')
 const bidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
     getAll: (req,res) => {
-        users.findAll({
+        user.find({
             raw: true,
         })
         .then(result => {
-            res.send({message: "SUCCESS, result"})
-        }).catch(error => res.send (error))
-},
-
-addOne : (req,res) => {
-    const{nama, email, password, nama_usaha} = req.body
-    Users.create({nama, email, password}, 
-        (error, result) => {
-            if(error){
-                res.status(400).json({
-                    message: "NOT FOUND"
-                })
-            } else {
-                res.status(200).json({
-                    message: "SUCCESS",
-                })
-            }
-
+            res.send({message: "SUCCESS", result})
         })
-},
+        .catch(error => res.send(error))
+    },
+
+    addOne : (req,res) => {
+        const{nama, email, password} = req.body;
+        if(nama === null && email === null && password === null) {
+            res.status(400).json({message : "Data tidak boleh kosong"})
+        }else{
+            user.create({
+                nama: nama,
+                email: email, 
+                password: password
+            })
+            .then((result)=> {
+                res.status(200).send({message: "Registrasi Sukses", result})
+            })
+            .catch(error => res.send(error))
+        }
+    },
 
 updateOne : async (req,res) => {
     const {nama, nik, email, phoneNumber, wa, password} = req.body
-    const user = await Users.updateOne(
+    const users = await user.updateOne(
         {_id: req.params.id},
         {nama, nik, email, phoneNumber, wa, password, id_bidangUsaha}, {new: true}
     );
-    if(user) {
+    if(users) {
         res.send({
             message: "SUCCESS", user
         })
@@ -46,16 +47,16 @@ updateOne : async (req,res) => {
 },
 
 deleteOne : async (req,res) => {
-    const user = await Users.deleteOne(
+    const users = await user.deleteOne(
         {_id: req.params.id}, {new: true}
     );
-    if(user) {
+    if(users) {
         res.send({
             message: "SUCCESS", user
         })
     } else {
         res.send({message: "ERROR"})
     }
-}
-}
+}}
+
 
