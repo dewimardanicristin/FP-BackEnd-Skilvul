@@ -3,11 +3,11 @@ const bidangUsaha = require('../models/bidangUsaha')
 
 module.exports = {
     getAll: (req,res) => {
-        user.findAll({
+        user.find({
             raw: true,
         })
         .then(result => {
-            res.send({message: "SUCCESS, result"})
+            res.send({message: "SUCCESS", result})
         })
         .catch(error => res.send(error))
     },
