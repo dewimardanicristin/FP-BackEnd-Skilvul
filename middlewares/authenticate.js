@@ -11,7 +11,7 @@ const authenticateJWT = (req, res, next) => {
 
         if (err) {
           return res.status(403).send({
-            message: "you are not admin"
+            message: "you are not allowed"
           });
         }
         req.user = user;

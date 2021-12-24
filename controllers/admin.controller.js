@@ -24,7 +24,6 @@ class AdminController {
         username: body.username,
         password: body.password,
       });
-      console.log(isAdmin)
       if (isAdmin) {
         const accessToken = jwt.sign(
           { username: isAdmin.username, role: isAdmin.role },
