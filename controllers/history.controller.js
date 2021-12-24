@@ -2,13 +2,22 @@ const historyModel = require("./../models/history.model");
 const UserModel = require("./../models/user.model");
 
 class historyController {
+  static async getAllHistory(req, res) {
+    try {
+      const histories = await historyModel.find();
+      res.status(200).send(histories);
+    } catch (error) {
+      res.status(500).send({ err: error });
+    }
+  }
   static async getHistorybyIDUser(req, res) {
     try {
       const id = req.params.id;
+      console.log(id)
       const historyList = await historyModel.find({ id_user: id });
       res.status(200).send(historyList);
     } catch (error) {
-      res.status(500).send({ err: error });
+      res.status(500).send({ err: error.message });
     }
   }
   static async createOneHistory(req, res) {

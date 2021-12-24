@@ -21,14 +21,8 @@ const userSchema = new mongoose.Schema(
     },
     bidangUsaha: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "bidangUsaha",
+      ref: "BidangUsaha",
     },
-    id_history: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "history",
-      },
-    ],
     wa: {
       type: String,
     },
