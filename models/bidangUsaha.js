@@ -25,5 +25,6 @@ const bidangUsahaSchema = new Schema({
     }
 })
 
+
 const BidangUsaha = mongoose.model('bidangUsaha', bidangUsahaSchema)
 module.exports = BidangUsaha
