@@ -23,5 +23,5 @@ const UsahaSchema = new mongoose.Schema(
   opt
 );
 
-const UsahaModel = mongoose.model("Usaha", UsahaSchema);
+const UsahaModel = mongoose.model("BidangUsaha", UsahaSchema);
 module.exports = UsahaModel;

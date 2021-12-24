@@ -1,4 +1,3 @@
-const userModel = require("../models/user");
 const UserModel = require("../models/user.model")
 const usahaBidangModel = require("../models/usahaBidang.model")
 

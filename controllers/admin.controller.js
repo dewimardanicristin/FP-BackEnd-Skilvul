@@ -3,7 +3,7 @@ const InfluencerModel = require("../models/influencer.model");
 const AdminModel = require("../models/admin.model");
 const InsightModel = require("../models/insightdata.model");
 const jwt = require("jsonwebtoken");
-const user = require("../models/user");
+const user = require("../models/user.model");
 
 class AdminController {
   // Admin Controller

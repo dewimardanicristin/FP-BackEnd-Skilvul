@@ -1,5 +1,5 @@
 const historyModel = require('./../models/history.model')
-const UserModel = require('./../models/user')
+const UserModel = require('./../models/user.model')
 
 class historyController{
     static async getHistorybyIDUser(req,res){
