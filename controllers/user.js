@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model")
 const usahaBidangModel = require("../models/usahaBidang.model")
+const helper = require("../helpers")
 
 module.exports = {
   getAll: (req, res) => {
@@ -42,15 +43,19 @@ module.exports = {
 
       const idUsaha = usahaSaved._id.toString()
 
+      console.log(helper.hash(body.password))
+
       const newUser = new UserModel({
         nama: body.nama,
         email: body.email,
-        password: body.password,
+        password: helper.hash(body.password),
         nik: body.nik,
         phoneNumber: body.phoneNumber,
         wa: body.wa,
         bidangUsaha: idUsaha,
       });
+
+      console.log(newUser)
 
       const saved = await newUser.save();
       res.status(201).send(saved);
